@@ -1,1 +1,3 @@
-<app-firework-list></app-firework-list>
+
+<app-timer-progress-bar [FireworkList]="fireworkList"
+    (timeEvent)="handleTimeEvent($event)"></app-timer-progress-bar>

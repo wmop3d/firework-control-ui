@@ -1,8 +1,0 @@
-<button (click)="openDialog()">Add Firework</button>
-
-<div cdkDropList (cdkDropListDropped)="drop($event)">
-  <app-firework-card *ngFor="let firework of fireworks; let i = index" [firework]="firework" cdkDrag></app-firework-card>
-</div>
-<!-- <div *ngFor="let firework of fireworks">
-  <app-firework-card [firework]="firework"></app-firework-card>
-</div> -->

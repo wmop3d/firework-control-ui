@@ -1,0 +1,20 @@
+<div class="time-remaining">
+    <h1>Timer</h1>
+    <h1> {{currentTimeInSeconds}} </h1>
+</div>
+
+<div class="next-firing-event">
+    <h1>Next Firing Event</h1>
+    <h1> {{progressTime}} </h1>
+</div>
+<div class="next-firework-name">
+    <h1>Next Firework</h1>
+        <app-firework-countdown-card [fireworkCountdown]="nextFireworkName"></app-firework-countdown-card>
+</div>
+
+<h1 class="previous-firework-name">Previous Firework Name</h1>
+<div *ngFor="let firework of completedFireworks.slice().reverse()" class="previous-firework-card">
+   
+    <app-firework-countdown-card [fireworkCountdown]="firework"></app-firework-countdown-card>
+</div>
+

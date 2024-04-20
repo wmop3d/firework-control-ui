@@ -5,19 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FireworkListComponent } from './firework-list/firework-list.component'; // Add this line
-import { AddFireworkComponent } from './add-firework/add-firework.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { FireworkCardComponent } from './firework-card/firework-card.component'; // Add this line
 import { MatCardModule } from '@angular/material/card'; // Add this line
+import { TimerProgressBarComponent } from './timer-progress-bar/timer-progress-bar.component';
+import { FireworkCountdownCardComponent } from './firework-card/firework-countdown-card.component';
+import { FireworkManagerComponent } from './firework-manager/firework-manager.component'; // Add this line
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddFireworkComponent,
-    FireworkListComponent,
-    FireworkCardComponent,
-    
+    TimerProgressBarComponent,
+    FireworkCountdownCardComponent,
+    FireworkManagerComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -25,7 +25,8 @@ import { MatCardModule } from '@angular/material/card'; // Add this line
     ReactiveFormsModule,
     MatDialogModule,
     MatCardModule,
-    DragDropModule // Add this line
+    DragDropModule // Add this line,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
