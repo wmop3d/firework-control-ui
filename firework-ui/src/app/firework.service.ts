@@ -12,30 +12,23 @@ export interface FireworkCountdown {
   providedIn: 'root',
 })
 export class FireworkService {
-  private fireworkListSubject = new BehaviorSubject<FireworkCountdown[]>([]);
-  fireworkList$ = this.fireworkListSubject.asObservable();
+ 
+
 
   constructor() {}
 
-  setFireworkList(fireworks: FireworkCountdown[]) {
-    this.fireworkListSubject.next(fireworks);
+  armFirwework(){
+    console.log('Firework armed');
   }
 
-  addFirework(firework: FireworkCountdown) {
-    const current = this.fireworkListSubject.value;
-    this.fireworkListSubject.next([...current, firework]);
+  disarmFirework(){
+    console.log('Firework disarmed');
   }
 
-  saveFireworkList(): string {
-    return JSON.stringify(this.fireworkListSubject.value);
+  fireFirework(firework: FireworkCountdown): number{
+    console.log(firework.name + ' fired');
+
+    return 1;
   }
 
-  loadFireworkList(jsonString: string) {
-    try {
-      const fireworks = JSON.parse(jsonString);
-      this.setFireworkList(fireworks);
-    } catch (e) {
-      console.error('Error parsing JSON', e);
-    }
-  }
 }

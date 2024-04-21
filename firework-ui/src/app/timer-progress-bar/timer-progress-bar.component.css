@@ -13,6 +13,7 @@
     color: #b9b9b9;
     text-align: center;
     margin-top: 10px;
+    padding-top:75px;
 }
 
 .next-firework-name {
@@ -30,9 +31,52 @@
     text-align: center;
     margin-top: 10px;
 }
+.firework-arm{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #b9b9b9;
+    text-align: center;
+    margin-top: 10px;
+    display:inline-block;
+    position:absolute;
+   top:0;
+   left:0;
+
+}
 
 .previous-firework-card {
     text-align: center;
     width: 30%;
     padding-left: 35%;
+}
+
+input{
+    height: 100px;
+    width: 100px;
+
+}
+
+button{
+    position: absolute;
+    top: 50%;
+    left: 17%;
+    height: 30%;
+    width: 75%;
+    font-size: 50px;
+    background-color: dimgrey;
+    box-shadow: inset 0 0 20px #000000;
+}
+
+.pause-btn{
+    position: absolute;
+    top: 7%;
+    left: 40%;
+    height: 10%;
+    width: 20%;
+    background-color: rgb(120, 51, 51);
+}
+
+.show-started-display{
+    display:block;
+
 }

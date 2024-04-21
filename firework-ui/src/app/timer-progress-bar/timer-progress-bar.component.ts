@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FireworkCountdown } from '../models/firework';
+import fireworks from '../fireworks.json';
+import { FireworkService } from '../firework.service';
+
 
 @Component({
     selector: 'app-timer-progress-bar',
@@ -8,10 +11,18 @@ import { FireworkCountdown } from '../models/firework';
 })
 export class TimerProgressBarComponent implements OnInit, OnDestroy {
 
+
+    constructor(private fireworkService: FireworkService) { }   
+    pause = false;
+    pauseBtnText = "Pause";
+    isArmed = false;
+    checkArmed: any;
     startTimeInSeconds: number = 0;
 
-    @Input() FireworkList: FireworkCountdown[] = [];
-    @Output() timeEvent = new EventEmitter<string>();
+    showStarted = false;
+
+    FireworkList: FireworkCountdown[] = fireworks as FireworkCountdown[];
+
     progressTime = 0;
     currentTimeInSeconds: number = 0;
     nextEventTimeInSeconds: number = 0;
@@ -31,11 +42,45 @@ export class TimerProgressBarComponent implements OnInit, OnDestroy {
         name: '',
         firetime: 0
     } || undefined;
-    
+
     private intervalId: any;
     eventTimes: number[] = [];
 
-    ngOnInit(): void {
+
+    handleTimeEvent(event: string): void {
+        const firework = JSON.parse(event);
+      
+        
+        console.log(firework);
+      }
+
+    StartTheShow() {
+
+        if (this.checkArmed) {
+            if (window.confirm("Are you sure you want to start the show?")) {
+                this.showStarted = true;
+                this.startShowSteps();
+            }
+
+        }
+        else {
+            alert("Please arm the igniters first");
+        }
+
+    }
+
+    armDisarmFirework(event: any){
+       
+        if(event.target.checked){
+            this.fireworkService.armFirwework();
+        }
+        else
+        {
+            this.fireworkService.disarmFirework();
+        }
+    }
+
+    startShowSteps(): void {
 
         this.startTimeInSeconds = 0;
 
@@ -50,6 +95,17 @@ export class TimerProgressBarComponent implements OnInit, OnDestroy {
         this.intervalId = setInterval(() => this.updateTime(), 1000);
 
         this.startTimeInSeconds = this.eventTimes[this.eventTimes.length - 1];
+
+        this.showStarted = true;
+    }
+
+    ngOnInit(): void {
+
+
+    }
+    pauseShow(){
+        this.pause = !this.pause;
+    
     }
 
     ngOnDestroy(): void {
@@ -59,23 +115,37 @@ export class TimerProgressBarComponent implements OnInit, OnDestroy {
     }
 
     private updateTime(): void {
-        if (!this.showComplete) {
-            this.currentTimeInSeconds++;
-            this.updateNextEventProgress();
 
-            if (this.eventTimes.includes(this.currentTimeInSeconds)) {
-                this.timeEvent.emit(JSON.stringify(this.nextFireworkName));
-                this.completedFireworks.push(this.nextFireworkName);
-                this.updateNextEventTime();
+        if (!this.pause) {
+            this.pauseBtnText = "Pause";
+
+            if (!this.showComplete) {
+                this.currentTimeInSeconds++;
+                this.updateNextEventProgress();
+
+                if (this.eventTimes.includes(this.currentTimeInSeconds)) {
+                    
+                    this.fireworkService.fireFirework(this.nextFireworkName);  
+
+                    this.completedFireworks.push(this.nextFireworkName);
+
+                    this.updateNextEventTime();
+                }
+            } else {
+                clearInterval(this.intervalId);
             }
-        } else {
-            clearInterval(this.intervalId);
+
+        }
+        else
+        {
+            this.pauseBtnText = "Continue";
         }
     }
 
     private updateNextEventTime(): void {
 
         this.nextEventTimeInSeconds = this.eventTimes?.find(time => time > this.currentTimeInSeconds)?.valueOf() ?? 1;
+        
 
         this.previousFireworkName = this.nextFireworkName;
 
