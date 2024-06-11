@@ -11,6 +11,7 @@ import { TimerProgressBarComponent } from './timer-progress-bar/timer-progress-b
 import { FireworkCountdownCardComponent } from './firework-card/firework-countdown-card.component';
 import { FireworkManagerComponent } from './firework-manager/firework-manager.component'; // Add this line
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
     TimerProgressBarComponent,
     FireworkCountdownCardComponent,
     FireworkManagerComponent,
+    
 
   ],
   imports: [
@@ -27,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatCardModule,
     DragDropModule,
-    FormsModule // Add this line,
+    FormsModule,
+    HttpClientModule 
 
   ],
   providers: [],
