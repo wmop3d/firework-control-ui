@@ -1,22 +1,29 @@
-<div class="time-remaining">
+<!-- <div class="time-remaining">
     <h1>Timer</h1>
     <h1> {{currentTimeInSeconds}} </h1>
-</div>
+</div> -->
 
-<div class="pause-btn-container" *ngIf="showStarted">
-<button class="pause-btn" (click)="pauseShow()">{{pauseBtnText}}</button>
-</div>
+<!-- <div class="pause-btn-container" *ngIf="showStarted">
+    <button class="pause-btn" (click)="pauseShow()">{{pauseBtnText}}</button>
+</div> -->
 
-<div class="firework-arm">
+<!-- <div class="firework-arm">
     <h1>Digital Arm Firework</h1>
-    <input type="checkbox" [(ngModel)]="checkArmed"  (change)="armDisarmFirework($event)" />
+    <input type="checkbox" [(ngModel)]="checkArmed" (change)="armDisarmFirework($event)" />
+</div>
+ -->
+<button class="refresh-btn" (click)="refreshData()">
+    ⟳ Refresh
+</button>
+<div *ngFor="let launcherNode of launcherNodes" class="launcher-node">
+    <app-launcher-node-card [launcherNode]="launcherNode"></app-launcher-node-card>
 </div>
 
 
-<div class="start-show-btn" *ngIf="!showStarted">
+<!-- <div class="start-show-btn" *ngIf="!showStarted">
     <button (click)="StartTheShow()">Start Show</button>
 </div>
-
+ -->
 <div *ngIf="showStarted" class="show-started-display">
 
     <div class="next-firing-event">

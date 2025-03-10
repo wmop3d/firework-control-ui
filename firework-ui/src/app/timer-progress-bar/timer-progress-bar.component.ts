@@ -1,13 +1,15 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FireworkCountdown } from '../models/firework';
+import { FireworkCountdown, LauncherNode } from '../models/firework';
 import fireworks from '../fireworks.json';
 import { FireworkService } from '../firework.service';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'app-timer-progress-bar',
   templateUrl: './timer-progress-bar.component.html',
   styleUrls: ['./timer-progress-bar.component.css']
 })
+
 export class TimerProgressBarComponent implements OnInit, OnDestroy {
   constructor(private fireworkService: FireworkService) { }
   pause = false;
@@ -35,9 +37,12 @@ export class TimerProgressBarComponent implements OnInit, OnDestroy {
   private intervalId: any;
   eventTimes: number[] = [];
 
+  launcherNodes: LauncherNode[] = [];
+
   handleTimeEvent(event: string): void {
     const firework = JSON.parse(event);
-    this.fireworkService.fireFirework(firework);
+
+    //this.fireworkService.fireFirework(firework);
     console.log(firework);
   }
 
@@ -70,7 +75,18 @@ export class TimerProgressBarComponent implements OnInit, OnDestroy {
     this.showStarted = true;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.fireworkService.latestNodeData.pipe(skip(1)).subscribe((data) => {
+      console.log(data);
+      this.launcherNodes = data;
+    })
+
+    this.fireworkService.getNodes();
+  }
+
+  refreshData() {
+    this.fireworkService.getNodes();
+  }
 
   pauseShow() {
     this.pause = !this.pause;
@@ -92,7 +108,7 @@ export class TimerProgressBarComponent implements OnInit, OnDestroy {
         // Fire all fireworks scheduled for the current time
         const fireworksToFire = this.FireworkList.filter(firework => firework.firetime === this.currentTimeInSeconds);
         fireworksToFire.forEach(firework => {
-          this.fireworkService.fireFirework(firework);
+          //this.fireworkService.fireFirework(firework);
           this.completedFireworks.push(firework);
         });
 

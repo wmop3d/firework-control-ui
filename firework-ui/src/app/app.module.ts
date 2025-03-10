@@ -12,6 +12,7 @@ import { FireworkCountdownCardComponent } from './firework-card/firework-countdo
 import { FireworkManagerComponent } from './firework-manager/firework-manager.component'; // Add this line
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LauncherNodeCardComponent } from './launcher-node-card/launcher-node-card.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     TimerProgressBarComponent,
     FireworkCountdownCardComponent,
     FireworkManagerComponent,
+    LauncherNodeCardComponent,
     
 
   ],
