@@ -1,1 +1,16 @@
-<p>launcher-node-card works!</p>
+<div class="card"
+  [class.master-card]="launcherNode.Letter === 'MASTER'"
+  [class.card-has-issue]="getBatteryPercentage() < 50 || getRssi() === 'UNK'">
+  <div class="card-header">
+    <div *ngIf="launcherNode.Letter === 'MASTER'" class="icon-letter master-badge">🌟 MAIN</div>
+    <div *ngIf="launcherNode.Letter !== 'MASTER'" class="icon-letter">🚀 <span class="node-letter">{{ launcherNode.Letter }}</span></div>
+    <div class="wifi-strength">📶 <strong></strong> {{ getRssi() }}</div>
+  </div>
+  <div class="card-body">
+    <p>🔋 <strong></strong> {{ getBatteryPercentage() }}</p>
+    <p class="mac-field">{{ launcherNode.MAC }}</p>
+  </div>
+  <div class="card-footer">
+    <small>Updated: {{ secondsSinceUpdate }} seconds ago</small>
+  </div>
+</div>

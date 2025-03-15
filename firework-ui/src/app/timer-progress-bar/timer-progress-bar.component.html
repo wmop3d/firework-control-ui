@@ -1,44 +1,69 @@
-<!-- <div class="time-remaining">
-    <h1>Timer</h1>
-    <h1> {{currentTimeInSeconds}} </h1>
-</div> -->
+<div class="timer-container">
 
-<!-- <div class="pause-btn-container" *ngIf="showStarted">
-    <button class="pause-btn" (click)="pauseShow()">{{pauseBtnText}}</button>
-</div> -->
+    <button class="refresh-btn" (click)="refreshData()">⟳ Refresh Nodes</button>
 
-<!-- <div class="firework-arm">
-    <h1>Digital Arm Firework</h1>
-    <input type="checkbox" [(ngModel)]="checkArmed" (change)="armDisarmFirework($event)" />
-</div>
- -->
-<button class="refresh-btn" (click)="refreshData()">
-    ⟳ Refresh
-</button>
-<div *ngFor="let launcherNode of launcherNodes" class="launcher-node">
-    <app-launcher-node-card [launcherNode]="launcherNode"></app-launcher-node-card>
-</div>
-
-
-<!-- <div class="start-show-btn" *ngIf="!showStarted">
-    <button (click)="StartTheShow()">Start Show</button>
-</div>
- -->
-<div *ngIf="showStarted" class="show-started-display">
-
-    <div class="next-firing-event">
-        <h1>Next Firing Event</h1>
-        <h1> {{progressTime}} </h1>
+    <div class="launcher-nodes">
+        <app-launcher-node-card *ngFor="let launcherNode of launcherNodes" [launcherNode]="launcherNode">
+        </app-launcher-node-card>
     </div>
 
-    <div class="next-firework-name">
-        <h1>Next Firework</h1>
-        <app-firework-countdown-card [fireworkCountdown]="nextFireworkName"></app-firework-countdown-card>
+
+    <div class="top-bar">
+        <div class="arm-controls">
+            <h3>Digital Arm Firework</h3>
+            <input type="checkbox" [(ngModel)]="checkArmed" (change)="armDisarmFirework($event)" />
+        </div>
+        <div class="upload-show">
+            <button class="upload-btn" (click)="uploadShow()">Upload Show</button>
+        </div>
+        <div>
+            <button class="sync-time-btn" (click)="syncTimeWithServer()">Sync Time with Server</button>
+        </div>
+    </div>
+    <div class="controls">
+        <div *ngIf="showStarted && !pause" class="pause-btn-container">
+            <button class="pause-btn" (click)="pauseShow()">Pause</button>
+        </div>
+        <div *ngIf="!showStarted || pause">
+            <button class="start-show-btn" (click)="StartTheShow()">{{pause ? 'Resume' : 'Start'}} Show</button>
+        </div>
+        <div *ngIf="pause" class="pause-controls">
+            <button class="start-show-btn" (click)="resumeShowAtTime(0)">Restart Show From Beginning</button>
+            
+            <div *ngIf="false" class="custom-resume">
+                <button class="start-show-btn" (click)="resumeShowAtTime(resumeTime)">Resume Show at Time</button>
+                <input id="resumeTime" type="number" [(ngModel)]="resumeTime" class="timer-input" />
+
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="timer-display">
+        <div class="local-time-container">
+            <span class="time-label">Local</span>
+            <span class="time-value">{{ currentTimeInSeconds }}</span>
+        </div>
+        <div class="server-time-container">
+            <span class="time-label">Server</span>
+            <span class="time-value">{{ serverTimer }}</span>
+        </div>
     </div>
 
-    <h1 class="previous-firework-name">Previous Firework Name</h1>
-    <div *ngFor="let firework of completedFireworks.slice().reverse()" class="previous-firework-card">
 
-        <app-firework-countdown-card [fireworkCountdown]="firework"></app-firework-countdown-card>
+
+    <div *ngIf="showStarted" class="show-progress">
+        <div class="next-firing-event">
+            <h3>Next Firing Event: <span>{{ progressTime }}s</span></h3>
+            <h4>Next Firework:</h4>
+            <app-firework-countdown-card [fireworkCountdown]="nextFireworkName"></app-firework-countdown-card>
+        </div>
+
+        <div class="previous-fireworks">
+            <h4>Previous Firework Name</h4>
+            <div *ngFor="let firework of completedFireworks.slice().reverse()" class="previous-firework-card">
+                <app-firework-countdown-card [fireworkCountdown]="firework"></app-firework-countdown-card>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,92 +1,146 @@
-.time-remaining {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #b9b9b9;
-    text-align: center;
-    margin-top: 10px;
-    padding-left: 80%;
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 20px #000;
+    color: #fff;
 }
 
-.next-firing-event {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #b9b9b9;
-    text-align: center;
-    margin-top: 10px;
-    padding-top: 75px;
+.local-time-container{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #222;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 20px #000;
+    color: #fff;
+    font-size: 3rem;
 }
 
-.next-firework-name {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #b9b9b9;
-    text-align: center;
-    margin-top: 10px;
+.server-time-container{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #222;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 20px #000;
+    color: #fff;
+    font-size: 3rem;
 }
 
-.previous-firework-name {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #b9b9b9;
-    text-align: center;
-    margin-top: 10px;
+.start-show-btn {
+    display: block;
 }
 
-.firework-arm {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #b9b9b9;
+.timer-display {
     text-align: center;
-    margin-top: 10px;
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
+    margin-bottom: 20px;
+}
 
+.current-time {
+    font-size:  rem;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.arm-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button,
+input[type="checkbox"] {
+    cursor: pointer;
+}
+.sync-time-btn,
+.refresh-btn,
+.upload-btn {
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    background-color: rgb(39, 22, 90);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+}
+.start-show-btn,
+.pause-btn {
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    background-color: rgb(120, 51, 51);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.timer-input {
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    background-color: rgb(39, 22, 90);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    outline: none;
+    width: 100px;
+}
+
+.launcher-nodes {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.show-progress {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.next-firing-event,
+.previous-fireworks {
+    background-color: #151414;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1 1 300px;
+    max-width: 600px;
+    text-align: center;
 }
 
 .previous-firework-card {
-    text-align: center;
-    width: 30%;
-    padding-left: 35%;
+    margin: 10px 0;
 }
 
-input {
-    height: 100px;
-    width: 100px;
-
+.top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-button {
-    position: absolute;
-    top: 50%;
-    left: 17%;
-    height: 30%;
-    width: 75%;
-    font-size: 50px;
-    background-color: dimgrey;
-    box-shadow: inset 0 0 20px #000000;
-}
-
-.pause-btn {
-    position: absolute;
-    top: 7%;
-    left: 40%;
-    height: 10%;
-    width: 20%;
-    background-color: rgb(120, 51, 51);
-}
-
-.show-started-display {
-    display: block;
-
-}
-
-.refresh-btn {
-    position: absolute;
-    top: 7%;
-    left: 70%;
-    height: 10%;
-    width: 20%;
-    background-color: rgb(120, 51, 51);
+.custom-resume {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px auto 0;
+    max-width: 400px;
 }
